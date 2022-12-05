@@ -31,7 +31,7 @@ certificatesResolvers:
   # lets encrypt
   lets-encrypt:
     acme:
-      email: ${TRAEFIK_ACME_EMAIL}
+      email: ${TRAEFIK_CONT_ACME_EMAIL}
       storage: acme.json
       dnsChallenge:
         provider: cloudflare
