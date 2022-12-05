@@ -1,6 +1,6 @@
 # container-traefik
 
-docker compose container setup for traefik.
+docker compose container setup for [traefik](https://traefik.io/).
 
 ## setup
 
