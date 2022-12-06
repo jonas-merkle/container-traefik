@@ -19,7 +19,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/traefik.yml:/traefik.yml:ro
-      - ./config/dynamic-conf:/dynamic-config:ro
+      - ./config/dynamic-config:/dynamic-config:ro
       - ./config/certs/acme.json:/acme.json
     environment:
       - "CF_DNS_API_TOKEN=${TRAEFIK_CONT_CF_DNS_API_TOKEN}"
