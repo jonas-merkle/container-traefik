@@ -8,6 +8,7 @@ docker compose container setup for [traefik](https://traefik.io/).
 
    - docker
    - docker-compose
+   - this setup assumes that [Cloudflare](https://www.cloudflare.com/) is the DNS provider for your domain.
 
 1. fix file permissions
 
