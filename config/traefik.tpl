@@ -3,12 +3,27 @@ api:
   dashboard: true
   #insecure: true
 
+# Log setup
+log:
+  level: "INFO"
+  filePath: "/var/log/traefik/traefik.log"
+accessLog:
+  filePath: "/var/log/traefik/access.log"
+  bufferingSize: 100
+
 # Entrypoint configuration
 entryPoints:
 
+  # http entrypoint
   web:
     address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: "web"
+          scheme: "https"
 
+  # https entryPoint
   websecure:
     address: ":443"
 

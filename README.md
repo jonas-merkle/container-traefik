@@ -8,6 +8,12 @@ docker compose container setup for [traefik](https://traefik.io/).
 
    - docker
    - docker-compose
+   - htpasswd -> run this to install htpasswd:
+
+        ```bash
+        sudo apt update && sudo apt install apache2-utils
+        ```
+
    - this setup assumes that [Cloudflare](https://www.cloudflare.com/) is the DNS provider for your domain.
 
 1. fix file permissions
