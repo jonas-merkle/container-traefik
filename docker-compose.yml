@@ -37,6 +37,8 @@ services:
       - "traefik.http.routers.traefik-websecure.rule=Host(`${TRAEFIK_CONT_WEB_UI_URL}`)"
       - "traefik.http.routers.traefik-websecure.tls=true"
       - "traefik.http.routers.traefik-websecure.tls.certresolver=lets-encrypt"
+      - "traefik.http.routers.traefik-websecure.tls.domains[0].main=${TRAEFIK_CONT_MAIN_URL}"
+      - "traefik.http.routers.traefik-websecure.tls.domains[0].sans=${TRAEFIK_CONT_SANS_URL}"
       - "traefik.http.routers.traefik-websecure.middlewares=traefik-websecure-auth"
       - "traefik.http.routers.traefik-websecure.service=api@internal"
       # middlewares
