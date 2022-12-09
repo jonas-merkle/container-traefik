@@ -23,7 +23,7 @@ services:
       - ./config/traefik.yml:/traefik.yml:ro
       - ./config/dynamic-config:/dynamic-config:ro
       - ./config/certs/acme.json:/acme.json
-      - /var/log/crowdsec/traefik/:/var/log/traefik/  
+      - /var/log/crowdsec/traefik/:/var/log/traefik
     environment:
       - "CF_DNS_API_TOKEN=${TRAEFIK_CONT_CF_DNS_API_TOKEN}"
       - "CF_ZONE_API_TOKEN=${TRAEFIK_CONT_CF_ZONE_API_TOKEN}"
@@ -31,9 +31,6 @@ services:
       # enable traefik
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-net"
-      # http endpoint
-      #- "traefik.http.routers.traefik-web.entrypoints=web"
-      #- "traefik.http.routers.traefik-web.rule=Host(`${TRAEFIK_CONT_WEB_UI_URL}`)"
       # https endpoint
       - "traefik.http.routers.traefik-websecure.entrypoints=websecure"
       - "traefik.http.routers.traefik-websecure.rule=Host(`${TRAEFIK_CONT_WEB_UI_URL}`)"
@@ -76,8 +73,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config:/etc/crowdsec
-      - ./data:/var/lib/crowdsec/data
+      - ./config/crowdsec:/etc/crowdsec
+      - ./data/crowdsec:/var/lib/crowdsec/data
       - /var/log/auth.log:/var/log/auth.log:ro
       - /var/log/crowdsec:/var/log/crowdsec:ro
 

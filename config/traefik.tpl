@@ -5,7 +5,7 @@ api:
 
 # Log setup
 log:
-  level: "INFO"
+  level: "DEBUG"
   filePath: "/var/log/traefik/traefik.log"
 accessLog:
   filePath: "/var/log/traefik/access.log"
@@ -28,7 +28,7 @@ entryPoints:
     address: ":443"
     http:
       middlewares:
-        - crowdsec-bouncer@file
+        - default@file
 
 # Provider configuration
 providers:
