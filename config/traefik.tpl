@@ -20,12 +20,15 @@ entryPoints:
     http:
       redirections:
         entryPoint:
-          to: "web"
+          to: "websecure"
           scheme: "https"
 
   # https entryPoint
   websecure:
     address: ":443"
+    http:
+      middlewares:
+        - crowdsec-bouncer@file
 
 # Provider configuration
 providers:
