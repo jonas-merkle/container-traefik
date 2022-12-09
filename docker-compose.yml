@@ -32,8 +32,8 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-net"
       # http endpoint
-      - "traefik.http.routers.traefik-web.entrypoints=web"
-      - "traefik.http.routers.traefik-web.rule=Host(`${TRAEFIK_CONT_WEB_UI_URL}`)"
+      #- "traefik.http.routers.traefik-web.entrypoints=web"
+      #- "traefik.http.routers.traefik-web.rule=Host(`${TRAEFIK_CONT_WEB_UI_URL}`)"
       # https endpoint
       - "traefik.http.routers.traefik-websecure.entrypoints=websecure"
       - "traefik.http.routers.traefik-websecure.rule=Host(`${TRAEFIK_CONT_WEB_UI_URL}`)"

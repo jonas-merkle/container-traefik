@@ -1,7 +1,0 @@
-# Provider configuration
-providers:
-
-  # ssl config file provider
-  file:
-    filename: "./dynamic-config/ssl-config.yml"
-    watch: true
