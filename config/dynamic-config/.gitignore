@@ -1,3 +1,4 @@
 *.yml
 *.toml
+!dynamic-config-loader.yml
 !ssl-config.yml
