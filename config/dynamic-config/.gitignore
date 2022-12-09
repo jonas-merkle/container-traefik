@@ -1,1 +1,3 @@
 *.yml
+*.toml
+!ssl-config.yml
