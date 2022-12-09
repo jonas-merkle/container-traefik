@@ -46,7 +46,7 @@ services:
       # middlewares
       - "traefik.http.middlewares.traefik-websecure-auth.basicauth.users=${TRAEFIK_CONT_BASIC_AUTH}"
 
-  # crowdsec 
+  # crowdsec bouncer for traefik
   bouncer-traefik:
     image: fbonalair/traefik-crowdsec-bouncer:latest
     container_name: crowdsec-bouncer-traefik
@@ -56,7 +56,7 @@ services:
       CROWDSEC_AGENT_HOST: crowdsec-server:8080
     restart: unless-stopped
     depends_on:
-      - crowdsec
+      - crowdsec-server
     networks:
       - traefik-net
 
