@@ -32,8 +32,8 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-net"
       # http endpoint
-      #- "traefik.http.routers.traefik-web.entrypoints=web"
-      #- "traefik.http.routers.traefik-web.rule=Host(`${TRAEFIK_CONT_WEB_UI_URL}`)"
+      - "traefik.http.routers.traefik-web.entrypoints=web"
+      - "traefik.http.routers.traefik-web.rule=Host(`${TRAEFIK_CONT_WEB_UI_URL}`)"
       # https endpoint
       - "traefik.http.routers.traefik-websecure.entrypoints=websecure"
       - "traefik.http.routers.traefik-websecure.rule=Host(`${TRAEFIK_CONT_WEB_UI_URL}`)"
@@ -46,40 +46,40 @@ services:
       # middlewares
       - "traefik.http.middlewares.traefik-websecure-auth.basicauth.users=${TRAEFIK_CONT_BASIC_AUTH}"
 
-  # crowdsec bouncer for traefik
-  bouncer-traefik:
-    image: fbonalair/traefik-crowdsec-bouncer:latest
-    container_name: crowdsec-bouncer-traefik
-    hostname: crowdsec-bouncer-traefik
-    environment:
-      CROWDSEC_BOUNCER_API_KEY: ${TRAEFIK_CONT_BOUNCER_KEY}
-      CROWDSEC_AGENT_HOST: crowdsec-server:8080
-    restart: unless-stopped
-    depends_on:
-      - crowdsec-server
-    networks:
-      - traefik-net
-
-  # crowdsec ips server
-  crowdsec-server:
-    image: crowdsecurity/crowdsec:latest
-    container_name: crowdsec-server
-    hostname: crowdsec-server
-    environment:
-      PGID: "1000"
-      COLLECTIONS: "crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors"
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges=true
-    networks:
-      - traefik-net
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config:/etc/crowdsec
-      - ./data:/var/lib/crowdsec/data
-      - /var/log/auth.log:/var/log/auth.log:ro
-      - /var/log/crowdsec:/var/log/crowdsec:ro
+#  # crowdsec bouncer for traefik
+#  bouncer-traefik:
+#    image: fbonalair/traefik-crowdsec-bouncer:latest
+#    container_name: crowdsec-bouncer-traefik
+#    hostname: crowdsec-bouncer-traefik
+#    environment:
+#      CROWDSEC_BOUNCER_API_KEY: ${TRAEFIK_CONT_BOUNCER_KEY}
+#      CROWDSEC_AGENT_HOST: crowdsec-server:8080
+#    restart: unless-stopped
+#    depends_on:
+#      - crowdsec-server
+#    networks:
+#      - traefik-net
+#
+#  # crowdsec ips server
+#  crowdsec-server:
+#    image: crowdsecurity/crowdsec:latest
+#    container_name: crowdsec-server
+#    hostname: crowdsec-server
+#    environment:
+#      PGID: "1000"
+#      COLLECTIONS: "crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors"
+#    restart: unless-stopped
+#    security_opt:
+#      - no-new-privileges=true
+#    networks:
+#      - traefik-net
+#    volumes:
+#      - /etc/localtime:/etc/localtime:ro
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#      - ./config:/etc/crowdsec
+#      - ./data:/var/lib/crowdsec/data
+#      - /var/log/auth.log:/var/log/auth.log:ro
+#      - /var/log/crowdsec:/var/log/crowdsec:ro
 
 
 # networks to use
