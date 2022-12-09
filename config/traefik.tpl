@@ -35,9 +35,14 @@ providers:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
 
-  # File provider configuration (dynamic)
+  # SSL settings & secure header config
+  ssl-config:
+    filename: "./ssl-config.yml"
+    watch: true
+
+  # Directory provider configuration (dynamic)
   file:
-    filename: "./dynamic-config/dynamic-config-loader.yml"
+    directory: "./dynamic-config/"
     watch: true
 
 # certificates resolvers config
