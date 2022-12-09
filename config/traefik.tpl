@@ -33,7 +33,7 @@ providers:
   # Docker provider configuration
   docker:
     endpoint: "unix:///var/run/docker.sock"
-    exposedByDefault: fals
+    exposedByDefault: false
 
   # Directory provider configuration (dynamic)
   file:
