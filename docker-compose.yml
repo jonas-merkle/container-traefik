@@ -28,6 +28,8 @@ services:
       - "CF_DNS_API_TOKEN=${TRAEFIK_CONT_CF_DNS_API_TOKEN}"
       - "CF_ZONE_API_TOKEN=${TRAEFIK_CONT_CF_ZONE_API_TOKEN}"
     labels:
+      # enbale watchtower updates
+      - "com.centurylinklabs.watchtower.enable=true"
       # enable traefik
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-net"
@@ -56,6 +58,9 @@ services:
       - crowdsec-server
     networks:
       - traefik-net
+    labels:
+      # enbale watchtower updates
+      - "com.centurylinklabs.watchtower.enable=true"
 
   # crowdsec ips server
   crowdsec-server:
@@ -77,6 +82,9 @@ services:
       - ./data/crowdsec:/var/lib/crowdsec/data
       - /var/log/auth.log:/var/log/auth.log:ro
       - /var/log/crowdsec:/var/log/crowdsec:ro
+    labels:
+      # enbale watchtower updates
+      - "com.centurylinklabs.watchtower.enable=true"
 
 
 # networks to use
