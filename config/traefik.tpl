@@ -3,6 +3,10 @@ api:
   dashboard: true
   #insecure: true
 
+global:
+  checknewversion: true
+  sendanonymoususage: false
+
 # Log setup
 log:
   level: "DEBUG"
@@ -42,6 +46,8 @@ providers:
   file:
     directory: "./dynamic-config/"
     watch: true
+    
+  providersThrottleDuration: 10
 
 # certificates resolvers config
 certificatesResolvers:
