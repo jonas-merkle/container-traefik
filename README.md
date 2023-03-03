@@ -37,6 +37,12 @@ A Docker Compose container setup for [Traefik](https://traefik.io/).
     nano .env
     ```
 
+    Use the following command to create a username-password string:
+
+    ```bash
+    echo $(htpasswd -nb <user> '<password>')
+    ```
+
 3. Generate `traefik.yml` config file from `traefik.tpl` template file
 
     ```bash
