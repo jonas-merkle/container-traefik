@@ -17,6 +17,7 @@ services:
       - "443:443"
     networks:
       - traefik-net
+      - crowdsec-net
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -57,7 +58,7 @@ services:
     depends_on:
       - crowdsec-server
     networks:
-      - traefik-net
+      - crowdsec-net
     labels:
       # enbale watchtower updates
       - "com.centurylinklabs.watchtower.enable=true"
@@ -74,7 +75,7 @@ services:
     security_opt:
       - no-new-privileges=true
     networks:
-      - traefik-net
+      - crowdsec-net
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -93,3 +94,7 @@ networks:
   # traefik reverse proxy network
   traefik-net:
     external: true
+
+  #crowdsec net
+  crowdsec-net:
+    driver: bridge
