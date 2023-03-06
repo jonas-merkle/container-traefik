@@ -36,6 +36,12 @@ A Docker Compose container setup for [Traefik](https://traefik.io/).
     ```bash
     nano .env
     ```
+    
+    Mark the `.env` file so it's not tracked by git:
+
+    ```bash
+    git update-index --assume-unchanged .env
+    ```
 
     Use the following command to create a username-password string:
 
