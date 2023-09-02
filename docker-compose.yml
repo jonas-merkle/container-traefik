@@ -27,7 +27,6 @@ services:
       - /var/log/crowdsec/traefik/:/var/log/traefik
     environment:
       - "CF_DNS_API_TOKEN=${TRAEFIK_CONT_CF_DNS_API_TOKEN}"
-      - "CF_ZONE_API_TOKEN=${TRAEFIK_CONT_CF_ZONE_API_TOKEN}"
     labels:
       # enbale watchtower updates
       - "com.centurylinklabs.watchtower.enable=true"
