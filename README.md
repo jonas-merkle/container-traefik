@@ -8,10 +8,10 @@ A Docker Compose container setup for [Traefik](https://traefik.io/).
   - [Table of contents](#table-of-contents)
   - [Setup](#setup)
     - [0. Requirements](#0-requirements)
-    - [1. Fix file permissions](#1-fix-file-permissions)
-    - [2. Add environment variables](#2-add-environment-variables)
-    - [3. Generate `traefik.yml` config file from `traefik.tpl` template file](#3-generate-traefikyml-config-file-from-traefiktpl-template-file)
-    - [4. Create an api key for Cloudflare](#4-create-an-api-key-for-cloudflare)
+    - [1. Create an api key for Cloudflare](#1-create-an-api-key-for-cloudflare)
+    - [2. Fix file permissions](#2-fix-file-permissions)
+    - [3. Add environment variables](#3-add-environment-variables)
+    - [4. Generate `traefik.yml` config file from `traefik.tpl` template file](#4-generate-traefikyml-config-file-from-traefiktpl-template-file)
     - [5. Create docker network for traefik](#5-create-docker-network-for-traefik)
     - [6. First run](#6-first-run)
   - [env file](#env-file)
@@ -35,14 +35,26 @@ A Docker Compose container setup for [Traefik](https://traefik.io/).
 
 - this setup assumes that [Cloudflare](https://www.cloudflare.com/) is the DNS provider for your domain.
 
-### 1. Fix file permissions
+### 1. Create an api key for Cloudflare
+
+- Go to [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens)
+- Click on `Generate new Token`
+- Use the `Zone-DNS edit` template
+- Set a meaningfull name like `traefik @ docker01`
+- Make sure that there is a permission: `Zone - DNS - Edit`
+- Add the permission: `Zone - Zone - Read`
+- Add the zone ressource: `Add - All Zones`
+- Leave the ttl empty
+- Create the token
+
+### 2. Fix file permissions
 
 ```bash
 chmod +x init.sh
 chmod 600 ./config/certs/acme.json
 ```
 
-### 2. Add environment variables
+### 3. Add environment variables
 
 Add the missing information for the environment variables:
 
@@ -63,23 +75,11 @@ git update-index --assume-unchanged .env
 git update-index --assume-unchanged config/certs/acme.json
 ```
 
-### 3. Generate `traefik.yml` config file from `traefik.tpl` template file
+### 4. Generate `traefik.yml` config file from `traefik.tpl` template file
 
 ```bash
 ./init.sh
 ````
-
-### 4. Create an api key for Cloudflare
-
-- Go to [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens)
-- Click on `Generate new Token`
-- Use the `Zone-DNS edit` template
-- Set a meaningfull name like `traefik @ docker01`
-- Make sure that there is a permission: `Zone - DNS - Edit`
-- Add the permission: `Zone - Zone - Read`
-- Add the zone ressource: `Add - All Zones`
-- Leave the ttl empty
-- Create the token
 
 ### 5. Create docker network for traefik
 
