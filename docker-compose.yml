@@ -24,7 +24,7 @@ services:
       - ./config/traefik.yml:/traefik.yml:ro
       - ./config/dynamic-config:/dynamic-config:ro
       - ./config/certs/acme.json:/acme.json
-      - /var/log/crowdsec/traefik/:/var/log/traefik
+      - .data/log/:/var/log/traefik
     environment:
       - "CF_DNS_API_TOKEN=${TRAEFIK_CONT_CF_DNS_API_TOKEN}"
     labels:
@@ -81,7 +81,7 @@ services:
       - ./config/crowdsec:/etc/crowdsec
       - ./data/crowdsec:/var/lib/crowdsec/data
       - /var/log/auth.log:/var/log/auth.log:ro
-      - /var/log/crowdsec:/var/log/crowdsec:ro
+      - ./data/log:/var/log/crowdsec:ro
     labels:
       # enbale watchtower updates
       - "com.centurylinklabs.watchtower.enable=true"
