@@ -43,55 +43,9 @@ services:
       # middlewares
       - "traefik.http.middlewares.traefik-websecure-auth.basicauth.users=${TRAEFIK_CONT_BASIC_AUTH}"
 
-  # crowdsec bouncer for traefik
-  crowdsec-bouncer-traefik:
-    image: fbonalair/traefik-crowdsec-bouncer:latest
-    container_name: crowdsec-bouncer-traefik
-    hostname: crowdsec-bouncer-traefik
-    environment:
-      CROWDSEC_BOUNCER_API_KEY: ${TRAEFIK_CONT_BOUNCER_KEY}
-      CROWDSEC_AGENT_HOST: crowdsec-server:8080
-    restart: unless-stopped
-    depends_on:
-      - crowdsec-server
-    networks:
-      - crowdsec-net
-    labels:
-      # enbale watchtower updates
-      - "com.centurylinklabs.watchtower.enable=true"
-
-  # crowdsec ips server
-  crowdsec-server:
-    image: crowdsecurity/crowdsec:latest
-    container_name: crowdsec-server
-    hostname: crowdsec-server
-    environment:
-      PGID: "1000"
-      COLLECTIONS: "crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors"
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges=true
-    networks:
-      - crowdsec-net
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config/crowdsec:/etc/crowdsec
-      - ./data/crowdsec:/var/lib/crowdsec/data
-      - /var/log/auth.log:/var/log/auth.log:ro
-      - ./data/log:/var/log/crowdsec:ro
-    labels:
-      # enbale watchtower updates
-      - "com.centurylinklabs.watchtower.enable=true"
-
-
 # networks to use
 networks:
 
   # traefik reverse proxy network
   traefik-net:
     external: true
-
-  #crowdsec net
-  crowdsec-net:
-    driver: bridge
