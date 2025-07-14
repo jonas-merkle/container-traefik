@@ -1,6 +1,5 @@
 # service description
 services:
-
   # traefik reverse proxy server
   traefik-server:
     image: traefik:latest
@@ -15,7 +14,6 @@ services:
       - "443:443"
     networks:
       - traefik-net
-      - crowdsec-net
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -45,7 +43,6 @@ services:
 
 # networks to use
 networks:
-
   # traefik reverse proxy network
   traefik-net:
     external: true
